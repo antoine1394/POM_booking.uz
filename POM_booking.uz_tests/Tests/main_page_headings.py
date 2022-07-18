@@ -1,10 +1,9 @@
 from selenium import webdriver
-import time
 import unittest
-from Pages.loginPage import LoginPage
+from Pages.main_page import MainPage
 
 
-class LoginTest(unittest.TestCase):
+class MainPageTextTest(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -13,19 +12,13 @@ class LoginTest(unittest.TestCase):
         cls.driver.implicitly_wait(5)
         cls.driver.maximize_window()
 
-    def test_login_invalid(self):
+    def test_headings_main_page(self):
         driver = self.driver
         self.driver.get('https://booking.uz.gov.ua/')
 
-        login = LoginPage(driver)
-        login.click_authorisation_button()
-        login.enter_user_email('automation_testing')  # incorrect mail
-        login.enter_password('python')  # incorrect password
-        login.click_enter_button()
-        time.sleep(5)
-        login.incorrect_data_popup()
-
-        time.sleep(5)
+        main = MainPage(driver)
+        main.get_menu_headings()
+        main.get_uz_menu_headings()
 
     @classmethod
     def tearDownClass(cls):
