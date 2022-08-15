@@ -3,6 +3,7 @@ import unittest
 import time
 from POM_booking_uz_tests.Pages.login_page import LoginPage
 from POM_booking_uz_tests.Pages.home_page import HomePage
+from POM_booking_uz_tests.Pages.test_data import Headings
 
 
 class LoginTest(unittest.TestCase):
@@ -23,8 +24,10 @@ class LoginTest(unittest.TestCase):
         login.click_enter_button()
 
         homepage = HomePage(driver)
-        homepage.move_to_user_cabinet(driver)
-        homepage.click_logout_button()
+        time.sleep(1)
+        homepage.get_username(driver)
+        assert homepage.get_username(driver) == 'automation_testing'
+        assert homepage.get_auth_menu_headings(driver) == Headings.auth_cabinet_headings
 
     @classmethod
     def tearDownClass(cls):
